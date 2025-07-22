@@ -22,20 +22,40 @@
 
 import { FlutterPlugin, FlutterPluginBinding, MethodChannel, FlutterEngine, } from '@ohos/flutter_ohos';
 import { EngineLifecycleListener } from '@ohos/flutter_ohos/src/main/ets/embedding/engine/FlutterEngine';
+import { MainMethodCallHandler } from './MainMethodCallHandler'
 
 /** JustAudioOhosPlugin **/
 export default class JustAudioOhosPlugin implements FlutterPlugin {
   private channel: MethodChannel | null = null;
+  private methodCallHandler: MainMethodCallHandler | null = null;
 
   getUniqueClassName(): string {
     return "JustAudioOhosPlugin"
   }
 
   onAttachedToEngine(binding: FlutterPluginBinding): void {
+    let applicationContext = binding.getApplicationContext();
+    AppStorage.setOrCreate('context', applicationContext)
+    let messenger = binding.getBinaryMessenger();
+    this.methodCallHandler = new MainMethodCallHandler(applicationContext, messenger);
+    this.channel = new MethodChannel(messenger, "com.ryanheise.just_audio.methods");
+    this.channel.setMethodCallHandler(this.methodCallHandler)
+    let engine: FlutterEngine = binding.getFlutterEngine();
+    engine.addEngineLifecycleListener({
+      onPreEngineRestart: () => {
+        this.methodCallHandler?.dispose();
+      },
+      onEngineWillDestroy: () => {
 
+      }
+    } as EngineLifecycleListener);
   }
 
   onDetachedFromEngine(binding: FlutterPluginBinding): void {
-
+    this.methodCallHandler?.dispose();
+    this.methodCallHandler = null;
+    if (this.channel != null) {
+      this.channel.setMethodCallHandler(null)
+    }
   }
 }
