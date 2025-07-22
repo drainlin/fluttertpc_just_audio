@@ -8,8 +8,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  audio_session: ^0.2.0
-  rxdart: ^0.28.0
+  audio_session: 
+    git:
+      url: "https://gitcode.com/openharmony-sig/flutter_audio_session.git"
+      path: ""
+  rxdart: '>=0.26.0 <0.29.0'
   just_audio_media_kit: ^2.1.0
   media_kit_libs_linux: any
   media_kit_libs_windows_audio: any
