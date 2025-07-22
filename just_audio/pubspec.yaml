@@ -20,10 +20,16 @@ dependencies:
   just_audio_web: ^0.4.15
   # just_audio_web:
   #   path: ../just_audio_web
-  audio_session: ">=0.1.24 <0.3.0"
+  audio_session: 
+    git:
+      url: "https://gitcode.com/openharmony-sig/flutter_audio_session.git"
+      path: ""
   rxdart: '>=0.26.0 <0.29.0'
   path: ^1.8.0
-  path_provider: ^2.0.0
+  path_provider: 
+    git:
+      url: "https://gitcode.com/openharmony-sig/flutter_packages.git"
+      path: "packages/path_provider/path_provider"
   async: ^2.5.0
   uuid: '>=3.0.1 <5.0.0'
   crypto: ^3.0.0
@@ -53,3 +59,5 @@ flutter:
         sharedDarwinSource: true
       web:
         default_package: just_audio_web
+      ohos:
+        pluginClass: JustAudioOhosPlugin
