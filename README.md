@@ -16,10 +16,10 @@ Go to the project directory and add the following dependencies in pubspec.yaml
 ...
 
 dependencies:
-  just_audio_ohos:
-    git: 
-      url: https://gitcode.com/openharmony-sig/fluttertpc_just_audio
-      path: just_audio/ohos
+    just_audio:
+    git:
+      url: https://github.com/drainlin/fluttertpc_just_audio.git
+      path: just_audio
 
 ...
 ```
@@ -30,10 +30,10 @@ Execute Command
 flutter pub get
 ```
 
-Next, import 'just_audio_ohos.dart' into your dart code.
+Next, import 'just_audio.dart' into your dart code.
 
 ```dart
-import 'package:just_audio_ohos/just_audio_ohos.dart';
+import 'package:just_audio/just_audio.dart';
 ```
 
 ## Platform support
